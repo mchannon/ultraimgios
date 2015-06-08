@@ -41,14 +41,9 @@
     [self presentViewController:mediaUI animated:YES completion:nil];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
-    NSLog( @"earlier co0ntr");
-    
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {    
     [[NSUserDefaults standardUserDefaults] setObject:UIImagePNGRepresentation([info objectForKey:@"UIImagePickerControllerOriginalImage"]) forKey:@"portrait"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-//    [self.portraitButton setImage:[info objectForKey:@"UIImagePickerControllerOriginalImage"] forState:UIControlStateNormal];
     
     [ self uploadImage: info ];
     [ self dismissViewControllerAnimated:YES completion:nil];
@@ -63,15 +58,7 @@
     
     NSString *title = [[ self.accountTextField.text stringByAppendingString:@"" ] stringByAppendingString:strArray2[0]];
     
-    
-//    NSString *titleFormatted = [title base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-
-    
-//    NSString *rString = [@"http://ultraimg.com/api/1/upload/?key=3374fa58c672fcaad8dab979f7687397&format=json&source=FILES" stringByAddingPercentEscapesUsingEncoding : NSUTF8StringEncoding];
-//    NSString *rString = [[[@"http://ultraimg.com/api/1/upload/?key=3374fa58c672fcaad8dab979f7687397&format=json&source=FILES[\"" stringByAppendingString:title] stringByAppendingString: @"\"]"]stringByAddingPercentEscapesUsingEncoding : NSUTF8StringEncoding];
-//    NSString *rString = [[@"http://ultraimg.com/api/1/upload/?key=3374fa58c672fcaad8dab979f7687397&format=json&source=" stringByAppendingString:title] stringByAddingPercentEscapesUsingEncoding : NSUTF8StringEncoding];
-//    NSString *rString = [[@"http://ultraimg.com/api/1/upload/?key=3374fa58c672fcaad8dab979f7687397&format=json&source=" stringByAppendingString:title] stringByAddingPercentEscapesUsingEncoding : NSUTF8StringEncoding];
-    NSString *rString = [@"http://ultraimg.com/api/1/upload/?key=3374fa58c672fcaad8dab979f7687397&format=json&source=FILES['mugglyuggly202-292.jpg']" stringByAddingPercentEscapesUsingEncoding : NSUTF8StringEncoding];
+    NSString *rString = [[[@"http://ultraimg.com/api/1/upload/?key=3374fa58c672fcaad8dab979f7687397&format=json&source=FILES['" stringByAppendingString:title ] stringByAppendingString: @".jpg']"] stringByAddingPercentEscapesUsingEncoding : NSUTF8StringEncoding];
    
     NSLog( @"url: %@", rString);
     
@@ -86,7 +73,7 @@
 
     if (imageData != nil)
     {
-        NSString *filenames = [NSString stringWithFormat:@"mugglyuggly202-292.jpg"];      //set name here
+        NSString *filenames = [NSString stringWithFormat:@"%@.jpg", title];      //set name here
         NSLog(@"%@", filenames);
         
         NSString *boundary = @"---------------------------14737809831466499882746641449";
